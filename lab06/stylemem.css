@@ -1,0 +1,74 @@
+.app{
+    width: 1146px;
+    height: 610px;    
+    display: grid;    
+    grid-template-columns: auto auto auto auto auto auto;
+   background-image: url('./imagenes/backc.jpg');
+   
+}
+
+.card1{
+    column-gap: 10px;
+    row-gap: 08px;
+    margin: auto;
+     
+}
+
+.content{
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: 150ms;
+    cursor: pointer;
+    transform:perspective(1000px) rotateY(var(--rotate-y,0));
+    
+
+}
+
+.content:hover{
+    box-shadow: 0 0 5px 2px goldenrod;
+}
+
+.content.flip{
+    --rotate-y: 180deg;
+}
+
+.front{
+    position: absolute;
+    backface-visibility:hidden;
+
+}
+
+.back{
+    transform: rotateY(180deg);
+    backface-visibility:hidden;
+}
+
+.movments{
+    margin-top: 170px;
+    margin-left: 90px;
+    text-transform: uppercase;
+    color:white;
+}
+
+button{
+    margin-top: 140px;
+    margin-left: 70px;
+    width: 70px;
+    height: 70px;
+    background-color: transparent;
+    border-style: none;
+    cursor: pointer;
+}
+
+.card1.front{
+    transform: rotateY(90deg);
+    position: absolute;
+}
+
+.content .front{
+    transform:rotateY(0deg)
+}
