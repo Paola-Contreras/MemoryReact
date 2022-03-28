@@ -1,5 +1,5 @@
 const ELEMENT_SIZE = 190
-const ELEMENT_SIZE1 = 150
+const ELEMENT_SIZE1 = 140
 
 const imagesPool = [
     { src: './imagenes/iron1.jpg',
@@ -52,7 +52,7 @@ const imagesPool = [
   ];
 
 
-const Card = ({number,card,choice,flip,disable,fin}) => {
+const Card = ({number,card,choice,flip,disable}) => {
     const style = {
       width: `${ELEMENT_SIZE1}px`,
       height: `${ELEMENT_SIZE}px`,
@@ -62,7 +62,7 @@ const Card = ({number,card,choice,flip,disable,fin}) => {
     const handleclik =()=>{
       if(!disable){
          choice (card)
-         //fin(card)
+
       }
     }
 
@@ -92,6 +92,7 @@ const App = () => {
     const [choice1, setChoice1]= React.useState(null);
     const [choice2, setChoice2]= React.useState(null);
     const [desabilita, setDesabilita]=React.useState(false)
+    const [game, setGame]=React.useState(0);
     
     const shuffleArray =(array) => {
         for (let i = array.length - 1; i > 0; i--) {
@@ -118,8 +119,11 @@ const App = () => {
       if(choice1.src === choice2.src){
         setCard(prevCard =>{
           return prevCard.map(card =>{
+            //console.log(prevCard)
             if(card.src=== choice1.src){
+              
               return{...card, matched:true}
+              
             }else{
               return card
             }
@@ -127,6 +131,11 @@ const App = () => {
         })
         //console.log('aqui1')
         reset()
+        setGame(game+1)
+        if(game==7){
+          alert('Game Over')
+        }
+        console.log(game)
       }else{
         //console.log('22')
         setTimeout(() => reset(), 1000)
@@ -142,14 +151,13 @@ const App = () => {
     setDesabilita(false)
   })
 
-  const done =()=>{
-    console.log(cards)
-  }
-
   const Github = () =>{
     window.open("https://github.com/Paola-Contreras/MemoryReact")
   }
 
+  const reload = () =>{
+    window.location.reload()
+  }
 
     return (
       <div className='app'>
@@ -161,13 +169,13 @@ const App = () => {
               choice = {choice}
               flip={card === choice1 || card === choice2 || card.matched}
               disable={desabilita}
-              fin={done}
+
               
             ></Card>)}
-
       <span className="movments">Movimientos: {count}</span>
-      <button onClick={Github}><img src='./imagenes/git.png' height ="70" width="70"></img></button>
-     
+      <span className="fin">Presiona logo para reiniciar</span>
+      <button onClick={reload}><img src='./imagenes/title.png' height ="90" width="170"></img></button>
+      <button onClick={Github}><img src='./imagenes/git.png' height ="90" width="90"></img></button>
       </div>
     )
   }
